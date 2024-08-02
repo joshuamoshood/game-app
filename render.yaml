@@ -1,0 +1,18 @@
+# Exported from Render on 2024-08-02T06:25:06Z
+services:
+- type: web
+  name: game-app
+  runtime: node
+  repo: https://github.com/joshuamoshood/game-app
+  plan: free
+  envVars:
+  - key: NEWS_API_KEY
+    sync: false
+  - key: IGDB_CLIENT_SECRET
+    sync: false
+  - key: IGDB_CLIENT_ID
+    sync: false
+  region: oregon
+  buildCommand: node server.js
+  startCommand: node /opt/render/project/server.js
+version: "1"
