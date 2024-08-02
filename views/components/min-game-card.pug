@@ -1,0 +1,13 @@
+//- game-card.pug
+mixin minGameCard(game)
+    .row.mb-3
+        .col
+            a(href=`/games/${game.slug}`)
+                if game.cover
+                    .poster.relative
+                        img.card-img-top.img-fluid.img-rounded(src=game.cover.url.replace('thumb', 'cover_small'), alt=game.name)
+        .col-8
+            a(href=`/games/${game.slug}`)
+                h6.text-gray-300.mb-2 #{game.name}
+            span.text-gray-500
+                | #{game.first_release_date ? new Date(game.first_release_date *1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'n/a'}

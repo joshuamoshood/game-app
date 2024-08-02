@@ -1,0 +1,18 @@
+//- big-game-card.pug
+mixin bigGameCard(game)
+    .card.bg-light-purple.p-4.rounded.shadow-sm-transition.mb-5
+        .card-body
+            .row
+                .col-4.mb-3
+                    a(href=`/games/${game.slug}`)
+                        .poster.relative
+                            img.card-img-top.img-fluid.img-rounded(src=game.cover.url.replace('thumb', 'cover_big'), alt="...")
+                            .rating.absolute.cw-6.ch-6.ch-sm-8.cw-sm-8.border-radius-50.bg-dark-purple.text-center.d-flex.align-items-center.justify-content-center.js-rv-rating(style='z-index: 3; right: -1.5rem; bottom: -1.5rem;', data-rating=game.rating)
+                                //- Rating logic here (optional)
+                .col-8.pl-4
+                    a(href=`/games/${game.slug}`)
+                        h2.card-title.text-gray-300.mb-2 #{game.name}
+                    p.card-text.text-gray-500.mb-3
+                        each platform in game.platforms
+                            | #{platform.abbreviation ? platform.abbreviation + ", " : ""}
+                    p.card-text.text-gray-500.clamp.six-lines.game__summary #{game.summary}

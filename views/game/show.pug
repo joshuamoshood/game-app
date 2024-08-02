@@ -1,0 +1,112 @@
+extends ../layout/base-layout.pug
+include ../components/game-card
+include ../components/news-card
+block content
+    section.container.my-5
+        .row.gx-4
+            .col-lg-4.col-md-5.col-sm-12.px-3.px-sm-4.mb-3
+                img.card-img-top.img-fluid.img-rounded(
+                    src=`${game.cover.url.replace('thumb', 'cover_big')}`
+                    alt="..."
+                )
+            .col-lg-8.col-md-7.col-sm-12
+                .d-flex.flex-column
+                    .heading.mb-0
+                        h2.text-gray-100 #{game.name}
+
+                        div.genre.text-gray-300.mb-2
+                            if game.genres
+                                each genre, index in game.genres
+                                    span #{genre.name}
+                                    if index < game.genres.length - 1
+                                        | &middot;
+                            | &middot; #{game.involved_companies[0].company.name}
+
+                    .platforms.text-gray-300
+                        | !{ game.platforms_string }
+
+                    .row.gx-3.mb-3
+                        .col-lg-5.col-md-8.d-flex.align-items-center.mb-3
+                            if game.rating
+                                .rating.d-inline-flex.cw-sm-8.ch-sm-8.cw-6.ch-6.border-radius-50.bg-light-purple.text-center.align-items-center.justify-content-center.text-gray-300.position-relative(
+                                    data-details-rating=`${Math.round(game.rating)}`
+                                )
+                                    small.rating-type.d-inline-flex.text-gray-400.ml-2
+                                        | Member <br> Score
+
+                                .rating.d-inline-flex.cw-sm-8.ch-sm-8.cw-6.ch-6.ml-4.border-radius-50.bg-light-purple.text-center.align-items-center.justify-content-center.position-relative.text-gray-300(
+                                    data-details-rating=`${Math.round(game.rating)}`
+                                )
+                                    small.rating-type.d-inline-flex.text-gray-400.ml-2
+                                        | Critic <br> Score
+
+                        .col-md-7.col-md-12.d-flex.align-items-center.justify-content-center.justify-content-sm-start
+                            if game.links.website
+                                a.bg-light-purple.d-inline-flex.p-2.mx-2.border-radius-50.align-items-center.justify-content-center.justify-content-sm-start(href=`${game.links.website.url}`)
+                                    svg(xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe fill-current" viewBox="0 0 16 16")
+                                        path(fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4H2.255a7.025 7.025 0 0 1 3.072-2.472 6.7 6.7 0 0 0-.597.933c-.247.464-.462.98-.64 1.539zm-.582 3.5h-2.49c.062-.89.291-1.733.656-2.5H3.82a13.652 13.652 0 0 0-.312 2.5zM4.847 5H7.5v2.5H4.51A12.5 12.5 0 0 1 4.846 5zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5H7.5V11H4.847a12.5 12.5 0 0 1-.338-2.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12H7.5v2.923c-.67-.204-1.335-.82-1.887-1.855A7.97 7.97 0 0 1 5.145 12zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11H1.674a6.958 6.958 0 0 1-.656-2.5h2.49c.03.877.138 1.718.312 2.5zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12h2.355a7.967 7.967 0 0 1-.468 1.068c-.552 1.035-1.218 1.65-1.887 1.855V12zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5h-2.49A13.65 13.65 0 0 0 12.18 5h2.146c.365.767.594 1.61.656 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4H8.5V1.077c.67.204 1.335.82 1.887 1.855.173.324.33.682.468 1.068z")
+
+                            //- Instagram link
+                            if game.links.instagram
+                                a.bg-light-purple.d-inline-flex.p-2.mx-2.border-radius-50.align-items-center.justify-content-center.justify-content-sm-start(href=`${game.links.instagram.url}`)
+                                    svg(xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-instagram cw-4 ch-4 fill-current" viewBox="0 0 16 16")
+                                        path(d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.232 0 2.136-.008 2.389-.047 3.232-.035.78-.165 1.204-.275 1.485a2.471 2.471 0 0 1-.598.92 2.47 2.47 0 0 1-.92.598c-.282.11-.706.24-1.485.275-.844.039-1.096.047-3.232.047-2.136 0-2.389-.008-3.232-.047-.78-.035-1.204-.165-1.486-.275a2.474 2.474 0 0 1-.92-.598 2.469 2.469 0 0 1-.598-.92c-.11-.281-.24-.705-.275-1.485-.039-.844-.046-1.096-.046-3.232 0-2.136.007-2.389.046-3.232.036-.78.166-1.204.275-1.485.145-.373.319-.64.598-.92.28-.28.546-.453.92-.598.282-.11.706-.24 1.486-.275.843-.039 1.096-.046 3.232-.046zm0 0c-1.982 0-3.586 1.604-3.586 3.586s1.604 3.586 3.586 3.586 3.586-1.604 3.586-3.586-1.604-3.586-3.586-3.586zm4.019.586a.865.865 0 1 1-1.73 0 .865.865 0 0 1 1.73 0zM8 4.377a3.622 3.622 0 1 0 0 7.244 3.622 3.622 0 0 0 0-7.244zm0 1.441a2.181 2.181 0 1 1 0 4.362 2.181 2.181 0 0 1 0-4.362zm0 0a2.181 2.181 0 1 1 0 4.362 2.181 2.181 0 0 1 0-4.362zm4.019-.586a.865.865 0 1 1-1.73 0 .865.865 0 0 1 1.73 0z")
+
+                    .details.text-gray-300
+                        p
+                            | !{ game.summary }
+                    
+
+    //- Border bottom section
+    div.border-bottom.border-secondary.container
+
+    section.container.my-5
+        .heading.mb-5
+            h2.text-primary.text-capitalize Screenshots
+
+        if game.screenshots
+        .col-12
+            h4.text-gray-100 Screenshots
+            .row.gx-5#game__screenshot__js
+                each screenshot, index in game.screenshots.slice(0, 6)
+                    .col-lg-4.col-sm-6.mb-3.mb-md-5
+                        .poster.relative.bg-gray-700.screenshot.screenshot__item.cursor-pointer(style=`padding-bottom: 55%;`, data-src=screenshot.big)
+                            img.card-img-top.img-fluid.img-rounded.absolute(src=screenshot.big, srcset=screenshot.huge, alt="...")
+
+
+    //- Similar Games section
+    section.container.my-5
+        .heading.mb-5
+            h2.text-primary.text-capitalize Similar Games
+
+        .d-flex.flex-wrap
+            each similar_game, index in game.similar_games.slice(0, 6)
+                +gameCard(similar_game)
+
+    
+    //- news update section
+    section.container.my-5
+        .heading.mb-5
+            h2.text-primary.text-capitalize Latest News
+
+        .d-flex.flex-column
+            each newsData in news
+                +newsCard(newsData)
+
+    //- Modal Video component
+    modal-video 
+
+    //- Template for modal video
+    template#modal-ytl-template
+        link(rel="stylesheet" href='/css/modal-ytl.css')
+        
+        .modal-ytl(aria-hidden="true" id="modalYtl")
+            .container.px-2.px-md-5
+                .modal-dialog-ytl
+                    .modal-content-ytl
+                        .video-wrapper#videoWrapper
+                            //- Video iframe can be added here
+                        
+                        .modal-close-ytl
+                            svg(xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#fff" viewBox="0 0 16 16")
+                                path(d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z")

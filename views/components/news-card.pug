@@ -1,0 +1,16 @@
+//- news-card.pug
+mixin newsCard(news)
+    .card.bg-light-purple.p-4.rounded.shadow-sm-transition.mb-5
+        .card-body
+            .row
+                .col-4.mb-3
+                    a(href=news.url, target="_blank" rel="nofollow")
+                        .poster.relative
+                            img.card-img-top.img-fluid.img-rounded(src=news.urlToImage, alt=news.title)
+                                //- Rating logic here (optional)
+                .col-8.pl-4
+                    a(href=news.url, target="_blank" rel="nofollow")
+                        h2.card-title.text-gray-300.mb-2.fs-3 #{news.title}
+                    p.card-text.text-gray-500.clamp.six-lines.game__summary #{game.summary}
+                    if source && source.name
+                        p.card-text.text-gray-500.clamp.six-lines.game__summary #{source.name}

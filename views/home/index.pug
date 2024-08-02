@@ -1,0 +1,81 @@
+extends ../layout/base-layout.pug
+
+block content
+    section.card-row.container.my-5.px-4.px-md-0
+        .heading.mb-4
+            h2.text-primary.text-capitalize Popular Games Right Now
+        .d-flex.flex-wrap.justify-content-between
+            | <include-fragment
+            |   src="/partials/popular-games"
+            |   class="d-flex flex-wrap justify-content-between"
+            |   data-name="popularGames">
+            +popularGames()
+            | </include-fragment>
+    .border-bottom.border-secondary.container
+
+    section.container.my-5.px-4.px-md-0
+        .row
+            .main.col-lg-8.col-md-7.col-sm-12
+                .heading.mb-5
+                    h2.text-primary.text-capitalize Recently Reviewed
+                .d-flex.flex-column
+                    | <include-fragment
+                    |   src="/partials/recently-created-games"
+                    |   data-name="recentlyReviewedGames">
+                    +recentlyReviewedGames()
+                    | </include-fragment>
+            .sidebar.col-lg-3.offset-lg-1.col-md-5.col-sm-12
+                .heading.mb-4
+                    h2.text-primary.text-capitalize Most Anticipated
+                .d-flex.flex-column.mb-5
+                    | <include-fragment src="/partials/most-anticipated-games">
+                    +mostAnticipatedGames()
+                    | </include-fragment>
+                .heading.mb-4
+                    h2.text-primary.text-capitalize Coming Soon
+                .d-flex.flex-column.mb-5
+                    | <include-fragment src="/partials/coming-soon-games">
+                    +comingSoonGames()
+                    | </include-fragment>
+
+mixin popularGames()
+    each item in Array.from({ length: 12 }, (_, i) => i + 1)
+        .col-xl-2.col-lg-3.col-md-4.pl-md-3.col-sm-6.px-2.px-md-4.mb-3
+            .card.game-card
+                .poster.relative.bg-gray-600.poster-container.mb-3.rounded.wave
+                    .rating.card-rating.absolute.cw-6.ch-6.ch-sm-8.cw-sm-8.border-radius-50.bg-light-purple.text-center.d-flex.align-items-center.justify-content-center
+                        span
+                h6.card-title.bg-gray-600.text-container.mb-2.rounded.wave= '_'.repeat(Math.floor(Math.random() * (18 - 8 + 1)) + 8)
+                p.card-text.bg-gray-600.rounded.text-container.wave= '_'.repeat(5)
+
+mixin recentlyReviewedGames()
+    each item in Array.from({ length: 5 }, (_, i) => i + 1)
+        .card.bg-light-purple.p-4.rounded.shadow-sm-transition.mb-5
+            .card-body
+                .row
+                    .col-4.mb-3
+                        .poster.relative.bg-gray-600.poster-container.mb-3.rounded.w-100.wave
+                            .rating.card-rating.absolute.cw-6.ch-6.ch-sm-8.cw-sm-8.border-radius-50.bg-light-purple.text-center.d-flex.align-items-center.justify-content-center
+                                span.text-gray-400
+                    .col-8.pl-4
+                        h4.card-title.bg-gray-600.mb-2.text-container.rounded.wave= '_'.repeat(Math.floor(Math.random() * (30 - 18 + 1)) + 18)
+                        p.card-text.bg-gray-600.mb-3.text-container.rounded.wave= '_'.repeat(8)
+                        p.card-text.bg-gray-600.text-container.d-none.d-sm-block.rounded.wave= '_'.repeat(Math.floor(Math.random() * (50 - 30 + 1)) + 30)
+                        p.card-text.bg-gray-600.d-none.text-container.d-sm-block.rounded.wave= '_'.repeat(Math.floor(Math.random() * (50 - 30 + 1)) + 30)
+
+mixin mostAnticipatedGames()
+    each item in Array.from({ length: 4 }, (_, i) => i + 1)
+        .row.mb-3
+            .col
+                .poster.relative.poster-container-sm.bg-gray-600.w-100.rounded.wave
+            .col-8
+                h6.mb-2.bg-gray-600.text-container.rounded= '_'.repeat(Math.floor(Math.random() * (12 - 7 + 1)) + 7)
+                span.bg-gray-600.text-container.rounded
+
+mixin comingSoonGames()
+    .row.mb-3
+        .col
+            .poster.relative.poster-container-sm.bg-gray-600.w-100.rounded.wave
+        .col-8
+            h6.mb-2.bg-gray-600.text-container.rounded= '_'.repeat(Math.floor(Math.random() * (12 - 7 + 1)) + 7)
+            span.bg-gray-600.text-container.rounded
